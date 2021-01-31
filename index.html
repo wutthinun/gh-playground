@@ -35,22 +35,32 @@
             clear = document.getElementById('clear');
 
             console.warn('get media')
-            navigator.getUserMedia = ( navigator.getUserMedia ||
-                   navigator.webkitGetUserMedia ||
-                   navigator.mozGetUserMedia ||
-                   navigator.msGetUserMedia);
+            // navigator.getUserMedia = ( navigator.getUserMedia ||
+            //        navigator.webkitGetUserMedia ||
+            //        navigator.mozGetUserMedia ||
+            //        navigator.msGetUserMedia);
 
             // navigator.mediaDevices.getUserMedia({video: true, audio: false})
-            navigator.getUserMedia({video: true, audio: false},
-                (stream) => {
-                        console.warn('open stream')
-                        video.srcObject = stream;
-                        video.play();
-                },
-                (err) => {
-                    console.log("An error occurred: " + err);
-                }
+            navigator.getUserMedia({video: true, audio: false}
+            // ,
+                // (stream) => {
+                //         console.warn('open stream')
+                //         video.srcObject = stream;
+                //         video.play();
+                // },
+                // (err) => {
+                //     console.log("An error occurred: " + err);
+                // }
             )
+                .then(function(stream) {
+                    console.warn('open stream')
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(err) {
+                    console.log("An error occurred: " + err);
+                });
+
             video.addEventListener('canplay', function(ev){
                 if (!streaming) {
                     height = video.videoHeight / (video.videoWidth/width);
