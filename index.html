@@ -31,7 +31,11 @@
 
         function closeCamera() {
             console.log('Close camera')
-            document.getElementById('video').srcObject.getTracks().forEach(it => it.stop())
+            try {
+                document.getElementById('video').srcObject.getTracks().forEach(it => it.stop())
+            } catch (error) {
+                console.error(error)
+            }
 
             setTimeout(() => {
                 startup()
