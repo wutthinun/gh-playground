@@ -42,7 +42,9 @@
             //        navigator.msGetUserMedia);
 
             // navigator.mediaDevices.getUserMedia({video: true, audio: false})
-            navigator.mediaDevices.getUserMedia({video: true, audio: false}
+            navigator.mediaDevices.getUserMedia({video: {
+                facingMode: {exact: 'environment'}
+            }, audio: false}
             // ,
                 // (stream) => {
                 //         console.warn('open stream')
