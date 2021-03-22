@@ -17,18 +17,10 @@
     </div>
     <button class="btn btn-primary mt-3" id="startbutton">Take photo</button>
     <button class="btn btn-warning mt-3" id="clear">Clear</button>
-    <button class="btn btn-warning mt-3" id="switch" onclick="openCamera()">switch</button>
+    <button class="btn btn-warning mt-3" id="switch" onclick="startup()">switch</button>
 
     <script>
         var isFront = false
-
-        function openCamera() {
-            isFront = !isFront
-
-            var cameraConf = isFront ? true : {
-                facingMode: {exact: 'environment'}
-            }
-
         var width = 320;
         var height = 0;
         var streaming = false;
@@ -38,6 +30,14 @@
         var startbutton = null;
 
         function startup() {
+            isFront = !isFront
+
+            var cameraConf = isFront ? true : {
+                facingMode: {exact: 'environment'}
+            }
+
+            console.log("=======> ", cameraConf)
+
             video = document.getElementById('video');
             canvas = document.getElementById('canvas');
             // photo = document.getElementById('photo');
@@ -51,7 +51,7 @@
             //        navigator.msGetUserMedia);
 
             // navigator.mediaDevices.getUserMedia({video: true, audio: false})
-            navigator.mediaDevices.getUserMedia({video: cameraConf, audio: false}
+            navigator.mediaDevices.getUserMedia({video: true, audio: false}
             // ,
                 // (stream) => {
                 //         console.warn('open stream')
@@ -133,8 +133,6 @@
                 clearphoto();
             }
         }
-        window.addEventListener('load', startup, false);
-    }
     </script>
 </body>
 </html>
