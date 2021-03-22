@@ -17,9 +17,18 @@
     </div>
     <button class="btn btn-primary mt-3" id="startbutton">Take photo</button>
     <button class="btn btn-warning mt-3" id="clear">Clear</button>
+    <button class="btn btn-warning mt-3" id="switch" onclick="openCamera()">switch</button>
 
     <script>
-        (function() {
+        var isFront = false
+
+        function openCamera() {
+            isFront = !isFront
+
+            var cameraConf = isFront ? true : {
+                facingMode: {exact: 'environment'}
+            }
+
         var width = 320;
         var height = 0;
         var streaming = false;
@@ -42,9 +51,7 @@
             //        navigator.msGetUserMedia);
 
             // navigator.mediaDevices.getUserMedia({video: true, audio: false})
-            navigator.mediaDevices.getUserMedia({video: {
-                facingMode: {exact: 'environment'}
-            }, audio: false}
+            navigator.mediaDevices.getUserMedia({video: cameraConf, audio: false}
             // ,
                 // (stream) => {
                 //         console.warn('open stream')
@@ -127,7 +134,7 @@
             }
         }
         window.addEventListener('load', startup, false);
-    })()
+    }
     </script>
 </body>
 </html>
